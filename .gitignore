@@ -31,3 +31,6 @@ google-services.json
 
 # Android Profiling
 *.hprof
+
+/publish-to-maven.gradle
+/publish-to-maven-test.gradle.kts
