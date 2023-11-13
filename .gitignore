@@ -33,4 +33,5 @@ google-services.json
 *.hprof
 
 /publish-to-maven.gradle
-/publish-to-maven-test.gradle.kts
+/publish-to-maven.gradle.kts
+buildSrc/build.gradle.kts

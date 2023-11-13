@@ -6,14 +6,60 @@ plugins {
     id("org.jetbrains.kotlin.jvm")
     `kotlin-dsl`
     `java-gradle-plugin`
-}
-
-val publish_plugin_path = "${rootProject.projectDir}/publish-to-maven-test.gradle.kts"
-if (File(publish_plugin_path).exists()) {
-    apply(from = publish_plugin_path)
+    `maven-publish`
 }
 
 
+//val publish_plugin_path = "${rootProject.projectDir}/publish-to-maven.gradle-test.kts"
+//if (File(publish_plugin_path).exists()) {
+
+//}
+
+
+//version = "1.0.2"
+//group = "org.gradle.sample"
+//
+//publishing {
+//    publications {
+//        create<MavenPublication>("library") {
+//            from(components["java"])
+//        }
+//    }
+//    repositories {
+//        maven {
+//            url = uri(layout.buildDirectory.dir("publishing-repository"))
+//        }
+//    }
+//}
+
+//interface GreetingPluginExtension {
+//    val message: Property<String>
+//    val greeter: Property<String>
+//}
+//
+//class GreetingPlugin : Plugin<Project> {
+//    override fun apply(project: Project) {
+//
+//        val extension = project.extensions.create<GreetingPluginExtension>("greeting")
+//        extension.message.convention("Hello from GreetingPlugin")
+//        project.task("hello") {
+//            doLast {
+//                println("${extension.message.get()} from ${extension.greeter.get()}")
+//            }
+//        }
+//    }
+//}
+//
+//// Apply the plugin
+//apply<GreetingPlugin>()
+//
+//// Configure the extension
+////the<GreetingPluginExtension>().message = "Hi from Gradle"
+//
+//configure<GreetingPluginExtension> {
+//    message = "H2i"
+//    greeter = "Gradle"
+//}
 
 
 java {
@@ -38,8 +84,42 @@ dependencies {
 gradlePlugin {
     plugins {
         create("SoDependencyFinder") {
-            id = "io.github.litao0621.plugin"
+            id = "so-dependency_finder"
             implementationClass = "com.litao.lib.plugin.SoDependencyPlugin"
         }
     }
 }
+
+
+
+//abstract class GreetingToFileTask : DefaultTask() {
+//
+//    @get:OutputFile
+//    abstract val destination: RegularFileProperty
+//
+//    @TaskAction
+//    fun greet() {
+//        val file = destination.get().asFile
+//        file.parentFile.mkdirs()
+//        file.writeText("Hello!")
+//    }
+//}
+//
+//val greetingFile = objects.fileProperty()
+//
+//tasks.register<GreetingToFileTask>("greet") {
+//    destination = greetingFile
+//}
+//
+//tasks.register("sayGreeting") {
+//    dependsOn("greet")
+//    val greetingFile = greetingFile
+//    doLast {
+//        val file = greetingFile.get().asFile
+//        println("${file.readText()} (file: ${file.name})")
+//    }
+//}
+//
+//greetingFile = layout.buildDirectory.file("hello.txt")
+
+apply(from = "../publish-to-maven.gradle.kts")
